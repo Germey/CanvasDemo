@@ -13,6 +13,7 @@
 		canvas.height = 500;
 		var context = canvas.getContext("2d");
 		/* 创建线性渐变 */
+		/* 如果渐变线不足画布，则默认填充为黑色 */
 		var linerGrad = context.createLinearGradient(0,0,800,800);
 		linerGrad.addColorStop(0.0,"green");
 		linerGrad.addColorStop(0.5,"red");

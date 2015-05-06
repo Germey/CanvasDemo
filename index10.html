@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" style="border:1px solid #333;"></canvas>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		canvas.width = 800;
+		canvas.height = 500;
+		var context = canvas.getContext("2d");
+		/* 创建径向渐变 */
+		/* 如果渐变线不足画布，则默认填充为黑色 */
+		/* 分别是大圆和小圆的中心和半径，径向渐变发生在两个圆之间 */
+		var radiaGrad = context.createRadialGradient(400,250,20,500,500,1000);
+		radiaGrad.addColorStop(0.0,"green");
+		radiaGrad.addColorStop(0.5,"red");
+		radiaGrad.addColorStop(1.0,"yellow");
+		context.fillStyle = radiaGrad;
+		/* 创建渐变填充 */
+		context.fillRect(0,0,800,500);
+		
+	</script>
+</html>
