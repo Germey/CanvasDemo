@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		canvas.width = 800;
+		canvas.height = 500;
+		var context = canvas.getContext("2d");
+		context.lineWidth = 50;
+		context.beginPath();
+		/* 连接方式 lineJoin = "miter"(默认) "bevel" "round"
+		 miter是尖角连接，bevel是普通的连接，round是圆角
+		 * */
+		context.lineJoin = "miter";
+		/* 设置miterLimit的值，如果当前大于这个值，那么久以bevel模式绘制 */
+		context.miterLimit = 2;
+		context.lineTo(100,100);
+		context.lineTo(200,400);
+		context.lineTo(300,100);
+		context.stroke();
+	</script>
+</html>

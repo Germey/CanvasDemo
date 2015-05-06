@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		canvas.width = 800;
+		canvas.height = 500;
+		var context = canvas.getContext("2d");
+		context.beginPath()
+		context.lineTo(400,400);
+		context.lineTo(100,100);
+		context.lineTo(600,200);
+		/* 利用closePath可以绘制封闭图形 */
+		context.closePath();
+		context.strokeStyle = "blue";
+		context.lineWidth = 5;
+		/* 设置填充的颜色 */
+		context.fillStyle = "bisque";
+		/* 先填充后描边就不会覆盖一般的边界像素，否则边界会被覆盖  */
+		context.fill();
+		context.stroke();
+	</script>
+</html>

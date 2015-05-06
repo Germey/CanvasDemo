@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		canvas.width = 800;
+		canvas.height = 500;
+		var context = canvas.getContext("2d");
+		context.lineWidth = 50;
+		/* 圆头的直线 */
+		context.lineCap = "round";
+		context.beginPath();
+		context.lineTo(100,100);
+		context.lineTo(500,500);
+		context.stroke();
+		context.beginPath();
+		/* 默认正常的直线 */
+		context.lineCap = "butt";
+		context.lineTo(200,100);
+		context.lineTo(500,500);
+		context.stroke();
+		context.beginPath();
+		/* 方头的直线 */
+		context.lineCap = "square";
+		context.lineTo(400,100);
+		context.lineTo(500,500);
+		context.stroke();
+		/*会突出一部分圆头和方头，而且只能出现在直线的开头和结尾，
+		 并且圆头和方头是凸出来的一部分 */
+	</script>
+</html>
