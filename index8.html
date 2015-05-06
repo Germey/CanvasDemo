@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" style="border:1px solid #333;"></canvas>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		canvas.width = 800;
+		canvas.height = 500;
+		var context = canvas.getContext("2d");
+		context.lineWidth = 10;
+		context.beginPath();
+		/* 向右和向下分别平移200像素 */
+		context.translate(200,200);
+		context.lineTo(0,0);
+		context.lineTo(100,100);
+		context.stroke();
+		/* 如果这样的话，平移会被保留，需要重新反向平移 */
+		context.translate(-200,-200);
+		context.beginPath();
+		context.lineTo(0,0);
+		context.lineTo(400,200);
+		context.stroke();
+		/* 比这个更好的解决方法是使用save和restore*/
+		context.save();
+		context.beginPath();
+		/* 向右和向下分别平移200像素 */
+		context.translate(200,200);
+		/* 旋转，参数是弧度，中心点默认是原点，但是translate之后被置为200，200 */
+		context.rotate(3.14);
+		/* 缩放，横向和纵向放缩多少倍 */
+		context.scale(2,2);
+		context.lineTo(50,50);
+		context.lineTo(400,100);
+		context.stroke();
+		/* 如果这样的话，平移会被保留，需要重新反向平移 */
+		context.restore();
+		context.beginPath();
+		context.lineTo(50,50);
+		context.lineTo(400,200);
+		context.stroke();
+		
+	</script>
+</html>
