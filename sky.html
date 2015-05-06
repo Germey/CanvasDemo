@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas" style="border:1px solid #333">您的浏览器不支持Canvas</canvas>
+	</body>
+	<script>
+		window.onload = function() {
+			var canvas = document.getElementById("canvas");
+			canvas.width = 800;
+			canvas.height = 500;
+			var context = canvas.getContext("2d");
+			fillBackground(context);
+			drawStars(context);
+			fillMoon(context, 50, 600, 100 , 1.8);
+			fillLand(context);
+			addText(context);
+		}
+		
+		/* 加文字 */
+		function addText(context) {
+			context.save();
+			context.fillStyle = "yellow";
+			context.font = "normal 18px Microsoft Yahei";
+			context.fillText("仰望星空，脚踏实地，祝熊猫病可以实现自己的梦想。      ——— 静觅", 180, 480);
+			context.restore();
+		}
+		
+		/* 绘制地面 */
+		function fillLand(context) {
+			context.save();
+			context.beginPath();
+			context.arc(450, 1500, 1100, 0.2 * Math.PI, 0.8 * Math.PI,true);
+			context.closePath();
+			var landGrad = context.createLinearGradient(0, 800, 0, 300);
+			landGrad.addColorStop(0.0,"#030");
+			landGrad.addColorStop(1.0,"#580");
+			context.fillStyle = landGrad;
+			context.fill();
+			context.restore();
+		}
+		
+		/* 填充背景 */
+		function fillBackground(context) {
+			var linerGrad = context.createLinearGradient(0, 0, 0, 500);
+			linerGrad.addColorStop(0.0,"black");
+			linerGrad.addColorStop(1.0,"darkslateblue");
+			context.fillStyle = linerGrad;
+			context.fillRect(0, 0, canvas.width, canvas.height);
+		}
+		
+		/* 绘制月亮 */
+		function fillMoon(context, R , x, y , d) {
+			context.save();
+			context.translate(x, y);
+			context.rotate(45 * Math.PI / 180);
+			context.scale(R, R);
+			context.beginPath();
+			context.arc(0, 0, 1, 0.5 * Math.PI, 1.5 * Math.PI, true);
+			context.moveTo(0, -1);
+			context.arcTo(d, 0, 0, 1, dis(0, -1, d, 0)/d);
+			context.closePath();
+			context.fillStyle = "#FE3";
+			context.fill();
+			context.restore();
+		}
+		
+		/* 计算距离 */
+		function dis(x1, y1, x2, y2) {
+			return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+		}
+		
+		/* 绘制星星 */
+		function drawStars(context) {
+			for (var i = 0; i < 200; i++){
+				var r = Math.random() * 5 + 5;
+				var x = Math.random() * canvas.width;
+				var y = Math.random() * canvas.height * 0.8;
+				var rotate = Math.random() * 50 + 90;
+				drawStar(context, x, y, r, r/2, rotate);
+			}
+		}
+		
+		function drawStar(context, x, y, outR, inR, rotate){
+			context.beginPath();
+			for (var i = 0; i < 5; i++) {
+				context.lineTo(Math.cos((18 + i*72 - rotate)/180 * Math.PI) * outR + x,
+							 -Math.sin((18 + i*72 - rotate)/180 * Math.PI) * outR + y);
+				context.lineTo(Math.cos((54 + i*72 - rotate)/180 * Math.PI) * inR + x,
+							 -Math.sin((54 + i*72 - rotate)/180 * Math.PI) * inR + y);
+			}
+			context.closePath();
+			context.fillStyle = "yellow";
+			context.fill();
+		}
+	</script>
+</html>
